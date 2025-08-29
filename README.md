@@ -1,4 +1,5 @@
 
+```markdown
 # Chat-AI Text Processor 🤖
 
 [![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
@@ -12,6 +13,8 @@ A responsive React-based AI chat interface that detects language, translates tex
 
 **Live Demo:** [Frontend on Vercel](#) | [Backend on Render](#)
 
+---
+
 ## Features ✨
 
 - **Language Detection** – Detect the language of user input.
@@ -21,6 +24,8 @@ A responsive React-based AI chat interface that detects language, translates tex
 - **Responsive Design** – Mobile-friendly layout.
 - **Error Handling** – Displays API errors and usage feedback gracefully.
 
+---
+
 ## Tech Stack 🛠️
 
 - **Frontend:** React, Axios, CSS
@@ -28,7 +33,12 @@ A responsive React-based AI chat interface that detects language, translates tex
 - **APIs:** Azure Translator, OpenAI GPT-4o-mini
 - **Deployment:** Vercel (frontend), Render (backend)
 
+---
+
 ## Project Structure
+
+```
+
 my-chat-ai/
 ├── public/             # Frontend public assets
 ├── src/                # React frontend code
@@ -42,51 +52,57 @@ my-chat-ai/
 ├── server/package.json # Backend dependencies
 └── README.md
 
+````
 
+---
 
 ## Getting Started 🚀
 
 ### Install Frontend
 
-. bash
+```bash
 git clone <your-github-repo-url>
 cd my-chat-ai
 npm install
+````
 
 ### Install Backend
 
-bash
+```bash
 cd server
 npm install
-
+```
 
 ### Environment Variables
 
 **Frontend (`.env.local` in root):**
 
-
+```
 REACT_APP_API_URL=http://localhost:5000
-
+```
 
 **Backend (`server/.env`):**
 
+```
 AZURE_TRANSLATOR_KEY=your-azure-key
 AZURE_TRANSLATOR_REGION=your-azure-region
 AZURE_TRANSLATOR_ENDPOINT=your-azure-endpoint
 OPENAI_API_KEY=your-openai-key
 PORT=5000
+```
 
 > **Important:** Never commit `.env` or `.env.local` files.
 
+---
 
 ### Run Locally
 
 **Backend:**
 
-`bash
+```bash
 cd server
 npm run dev
-
+```
 
 **Frontend:**
 
@@ -104,3 +120,5 @@ Visit [http://localhost:3000](http://localhost:3000)
 * **Backend:** Deploy to [Render](https://render.com)
 * **Frontend:** Deploy to [Vercel](https://vercel.com)
 * Configure environment variables on the respective platforms.
+
+---
