@@ -29,7 +29,7 @@ function App() {
           border: 'none',
         }}
       >
-        {darkMode ? '🌞 Light Mode' : '🌙 Dark Mode'}
+        {darkMode ? '🌞 Light' : '🌙 Dark'}
       </button>
       <Chat />
  </>
