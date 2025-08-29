@@ -1,24 +1,38 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import Header from './components/Header';
 import './App.css';
+import Chat from './components/chat';
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+  
+     useEffect(() =>{
+       document.body.classList.toggle('dark', darkMode);
+       }, [darkMode]);
+       
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+ <>
+ <Header />
+ <button
+        onClick={() => setDarkMode(!darkMode)}
+        style={{
+          position: 'absolute',
+          top: 10,
+          right: 10,
+          padding: '0.5rem 1rem',
+          cursor: 'pointer',
+          borderRadius: '8px',
+          background: darkMode ? '#333' : '#ddd',
+          color: darkMode ? '#fff' : '#000',
+          border: 'none',
+        }}
+      >
+        {darkMode ? '🌞 Light Mode' : '🌙 Dark Mode'}
+      </button>
+      <Chat />
+ </>
   );
 }
 
