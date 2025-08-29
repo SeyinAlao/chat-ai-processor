@@ -1,0 +1,253 @@
+/* Main Chat Container */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 10px;
+  border-radius: 8px;
+  background-color:  #1a1a2e;
+  border: 1px solid #2e2e3f;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  touch-action: pan-y;
+}
+
+.chat-container:hover{
+   background: linear-gradient(135deg, #40284e, #1f2c46);
+    border-color: rgb(221, 75, 253);
+    box-shadow: 0 5px 10px rgb(221, 75, 253);
+    transform: scale(1.05);
+}
+
+/* Chat Message Bubble */
+.chat-message {
+  max-width: 80%;
+  margin: 8px 0;
+  padding: 12px 16px;
+  border-radius: 20px;
+  background-color: #ebb8b8;
+  color: #333;
+  transition: background-color 0.2s ease;
+  animation: fadeInUp 0.3s ease;
+}
+
+.chat-message:hover {
+  background-color: #e0e0e0;
+}
+
+.chat-message-user {
+  align-self: flex-end;
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.chat-message-ai {
+  align-self: flex-start;
+  background-color: #e7eaf0;
+  color: #000;
+}
+
+/* Message Meta */
+.message-meta {
+  font-size: 11px;
+  color: #666;
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Language Badge */
+.language-badge {
+  background-color: #eaeaea;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 10px;
+}
+
+/* Chat Input */
+.chat-input-wrapper {
+  display: flex;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #ccc;
+  margin-top: auto;
+}
+
+.chat-textarea {
+  font-family: Jeju Myeongja;
+  flex: 1;
+  resize: none;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  height: 45px;
+}
+
+.send-button {
+  padding: 0 12px;
+  background-color: #7f33bd;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.send-button:hover {
+  background-color: #623786;
+}
+
+.send-button:disabled {
+  background-color: #a0c5f5;
+  cursor: not-allowed;
+}
+
+/* Summary & Translation */
+.summary, .translation {
+  background-color: #f9f9f9;
+  padding: 8px;
+  margin-top: 6px;
+  border-left: 4px solid #007bff;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+/* Translate Section */
+.translate-section {
+  margin-top: 6px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.translate-section select {
+  padding: 4px 8px;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+/* Action Buttons */
+.action-button {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: #6c757d;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: #5a6268;
+}
+
+/* Loading Dots */
+.loading-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.loading-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #999;
+  animation: blink 1.4s infinite both;
+}
+
+.loading-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.processing-text {
+  margin-left: 8px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* Animations */
+@keyframes blink {
+  0%, 80%, 100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar */
+.chat-container::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 6px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .chat-container {
+    width: 95%;
+    height: 85vh;
+    padding: 12px;
+  }
+}
+
+.buttonsed{
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.buttonsed:hover{
+  color: #40284e;
+  
+}
+.unsupported-message {
+  background-color: #fbd9f9;
+  border-left: 4px solid #7f3f70;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: rgb(42, 40, 40);
+}
+
+.download-progress-bar {
+  height: 8px;
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-inner {
+  height: 100%;
+  background-color: #6f42c1;
+  transition: width 0.4s ease;
+}

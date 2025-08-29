@@ -1,0 +1,142 @@
+.outer-border{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 13px;
+    max-width: 670px;
+    margin: 0 auto;
+    font-size: 0.875rem;
+}
+@media (min-width: 768px) {
+    .outer-border{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.border-box{
+  padding: 4px;
+  border-radius: 1rem;
+  background-color: #1a1a2e;
+  color: white;
+  border: 1px solid #2e2e3f;
+  cursor: default;
+  transition: all 0.3s ease;
+}
+
+.border-box:hover{
+    background: linear-gradient(135deg, #40284e, #1f2c46);
+    border-color: rgb(221, 75, 253);
+    box-shadow: 0 5px 10px rgb(221, 75, 253);
+    transform: scale(1.05);
+}
+
+.globe{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 3px;
+    color: #7f33bd;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+}
+
+.border-box:hover .globe{
+    transform: scale(1.1) rotate(12deg);
+}
+
+.language{
+    text-align: center;
+    margin-bottom: 1px;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+
+.border-box:hover .language{
+    color:#7f33bd;
+}
+
+.lang-text{
+    color: #888;
+    text-align: center;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+}
+
+.border-box:hover .lang-text{
+    color: #ddd;
+}
+
+.file{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    color: #7f33bd;
+    transition: all 0.3s ease;
+}
+
+.border-box:hover .file{
+    transform: scale(1.1) rotate(12deg);
+}
+
+.test{
+    text-align: center;
+    margin-bottom: 1px;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+
+.border-box:hover .test{
+    color:#7f33bd;
+}
+
+.test-text{
+    color: #888;
+    text-align: center;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+}
+
+.border-box:hover .test-text{
+    color: #ddd;
+}
+
+
+.langs{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    color: #7f33bd;
+    transition: all 0.3s ease;
+}
+
+.border-box:hover .langs{
+    transform: scale(1.1) rotate(12deg);
+}
+
+.Langugs{
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    margin-bottom: 1px;
+    transition: color 0.3s ease;
+}
+
+.border-box:hover .Langugs{
+    color:#7f33bd;
+}
+
+.Langs-text{
+    color: #888;
+    text-align: center;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+}
+
+.border-box:hover .Lang-text{
+    color: #ddd;
+}

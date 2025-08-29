@@ -1,0 +1,62 @@
+.Empty-state{
+    text-align: center;
+    padding: 69px;
+    animation: fadeIn 1s ease-in;
+}
+
+.icon-wrapper{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin:0 auto 1rem;
+    background: linear-gradient(to bottom right, rgba(132, 17, 143, 0.2),rgba(17, 9, 17, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 3s ease-in-out infinite;
+    transition: all 0.5s ease;
+}
+
+.icon-wrapper:hover{
+    transform: scale(1.1);
+    background: linear-gradient(to bottom right, rgba(20, 6, 26, 0.3), rgba(255, 0, 225, 0.3));
+}
+
+.chat-icon{
+    width: 32px;
+    height: 32px;
+    color: #5d1e73;
+    transition: all 0.3s ease;
+}
+
+.icon-wrapper:hover .chat-icon{
+    transform: scale(1.1);
+     color: #9258a9;
+}
+
+@keyframes fadeIn{
+    from{opacity: 0;transform: translateY(20px);}
+    to{opacity: 1;transform: translateY(0);}
+}
+
+@keyframes float{
+    0%, 100%{transform: translateY(0px);}
+    50% {transform: translateY(-25px);}
+}
+
+.S-text{
+  margin-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+.S-text:hover{
+    color: #9741b9;
+}
+
+.P-text{
+    margin-bottom: 6px;
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgb(96, 95, 95);
+}
