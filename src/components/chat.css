@@ -71,7 +71,6 @@
   display: flex;
   gap: 8px;
   padding-top: 12px;
-  border-top: 1px solid #ccc;
   margin-top: auto;
 }
 
@@ -84,6 +83,8 @@
   border: 1px solid #ccc;
   font-size: 15px;
   height: 45px;
+  width: 43px;
+  gap: 4px;
 }
 
 .send-button {
@@ -95,6 +96,7 @@
   cursor: pointer;
   font-size: 14px;
   display: flex;
+  
   align-items: center;
 }
 
