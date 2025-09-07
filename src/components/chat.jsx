@@ -78,7 +78,7 @@ export default function Chat() {
       languageConfidence: null,
       summary: null,
       translation: null,
-      selectedLanguage: 'fr'
+      selectedLanguage: 'en'
     };
 
     const loadingMessage = {
