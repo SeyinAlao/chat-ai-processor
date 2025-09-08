@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import './App.css';
 import Chat from './components/chat';
-
+import { Analytics } from '@vercel/analytics/react';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   
@@ -14,6 +14,7 @@ function App() {
 
   return (
  <>
+    <Analytics />
  <Header />
  <button
         onClick={() => setDarkMode(!darkMode)}
