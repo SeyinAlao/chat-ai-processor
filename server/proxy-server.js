@@ -182,7 +182,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // -------------------- Start Server --------------------
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`✅ Proxy server running on port ${port}`);
 });
 // To run the server: node proxy-server.js
