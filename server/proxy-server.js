@@ -8,7 +8,7 @@ const cors = require('cors');
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 10000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -183,5 +183,7 @@ app.get('/api/health', (req, res) => {
 
 // -------------------- Start Server --------------------
 app.listen(port, () => {
-  console.log(`✅ Proxy server running on http://localhost:${port}`);
+  console.log(`✅ Proxy server running on port ${port}`);
 });
+// To run the server: node proxy-server.js
+// Make sure to set the required environment variables in a .env file or your deployment environment.
