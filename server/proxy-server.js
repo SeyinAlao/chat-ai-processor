@@ -13,18 +13,27 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
+// Environment variables
 const translatorKey = process.env.AZURE_TRANSLATOR_KEY;
 const translatorRegion = process.env.AZURE_TRANSLATOR_REGION;
 const translatorEndpoint = process.env.AZURE_TRANSLATOR_ENDPOINT;
 const openaiApikey = process.env.OPENAI_API_KEY;
 
-// Detect language
+// ✅ Check that env variables exist at startup
+if (!translatorKey || !translatorRegion || !translatorEndpoint) {
+  console.warn("⚠️ Azure Translator env vars missing!");
+}
+if (!openaiApikey) {
+  console.warn("⚠️ OpenAI API key missing!");
+}
+
+// -------------------- Detect Language --------------------
 app.post('/api/detect', async (req, res) => {
   try {
     const { text } = req.body;
-if(!text || typeof text !== 'string' || text.trim() === ''){
-    return res.status(400).json({error: 'Text is required and must be a non-empty string'});
-}
+    if (!text || typeof text !== 'string' || text.trim() === '') {
+      return res.status(400).json({ error: 'Text is required and must be a non-empty string' });
+    }
 
     const response = await axios({
       baseURL: translatorEndpoint,
@@ -35,31 +44,37 @@ if(!text || typeof text !== 'string' || text.trim() === ''){
         'Ocp-Apim-Subscription-Region': translatorRegion,
         'Content-type': 'application/json',
       },
-      params: {
-        'api-version': '3.0'
-      },
+      params: { 'api-version': '3.0' },
       data: [{ Text: text }],
-      responseType: 'json'
+      timeout: 15000 // ⏳ 15s timeout
     });
 
     res.json(response.data);
   } catch (error) {
-   console.error("Detect API Error: ", error.response?.data || error.message);
-   res.status(500).json({
-    error: 'Language detection failed',
-    details: error.message,
-    apiResponse: error.response?.data|| null
-   });
+    console.error("❌ Detect API Error:", {
+      message: error.message,
+      code: error.code,
+      response: error.response?.data || null
+    });
+    res.status(500).json({
+      error: 'Language detection failed',
+      details: error.message,
+      apiResponse: error.response?.data || null
+    });
   }
 });
 
-// Translate text
+// -------------------- Translate Text --------------------
 app.post('/api/translate', async (req, res) => {
   try {
     const { text, to } = req.body;
-    if(!text || typeof text !== 'string' || text.trim() === ''){
-    return res.status(400).json({error: 'Text is required and must be a non-empty string'});
-}
+    if (!text || typeof text !== 'string' || text.trim() === '') {
+      return res.status(400).json({ error: 'Text is required and must be a non-empty string' });
+    }
+
+    if (!to) {
+      return res.status(400).json({ error: '"to" language code is required' });
+    }
 
     const response = await axios({
       baseURL: translatorEndpoint,
@@ -70,26 +85,27 @@ app.post('/api/translate', async (req, res) => {
         'Ocp-Apim-Subscription-Region': translatorRegion,
         'Content-type': 'application/json',
       },
-      params: {
-        'api-version': '3.0',
-        to: to
-      },
+      params: { 'api-version': '3.0', to },
       data: [{ Text: text }],
-      responseType: 'json'
+      timeout: 15000
     });
 
     res.json(response.data);
   } catch (error) {
-    console.error("Translate API Error: ", error.response?.data || error.message);
-   res.status(500).json({
-    error: 'Translation failed',
-    details: error.message,
-    apiResponse: error.response?.data|| null
-   });
+    console.error("❌ Translate API Error:", {
+      message: error.message,
+      code: error.code,
+      response: error.response?.data || null
+    });
+    res.status(500).json({
+      error: 'Translation failed',
+      details: error.message,
+      apiResponse: error.response?.data || null
+    });
   }
 });
 
-//Summarize Text
+// -------------------- Summarize Text --------------------
 app.post('/api/summarize', async (req, res) => {
   try {
     const { text } = req.body;
@@ -119,23 +135,19 @@ app.post('/api/summarize', async (req, res) => {
             'Authorization': `Bearer ${openaiApikey}`,
             'Content-Type': 'application/json'
           },
-          timeout: 120000, // 2 minutes
-          maxBodyLength: Infinity,
-          maxContentLength: Infinity,
-          httpAgent: new (require('http').Agent)({ keepAlive: true }),
-          httpsAgent: new (require('https').Agent)({ keepAlive: true })
+          timeout: 120000
         }
       );
     };
 
-    // Retry logic: 2 attempts
+    // Retry logic (2 attempts)
     let response;
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
         response = await makeRequest();
-        break; // success
+        break;
       } catch (err) {
-        if (attempt === 1) throw err; // throw after last attempt
+        if (attempt === 1) throw err;
       }
     }
 
@@ -143,11 +155,10 @@ app.post('/api/summarize', async (req, res) => {
     res.json({ summary });
 
   } catch (error) {
-    console.error("Summarization API Error:", {
+    console.error("❌ Summarization API Error:", {
       message: error.message,
       code: error.code,
-      response: error.response?.data,
-      stack: error.stack
+      response: error.response?.data || null
     });
     res.status(500).json({
       error: 'Summarization failed',
@@ -156,9 +167,21 @@ app.post('/api/summarize', async (req, res) => {
     });
   }
 });
-  app.listen(port, () => {
-  console.log(`Proxy server running on http://localhost:${port}`);
+
+// -------------------- Health Check --------------------
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: "OK",
+    azure: {
+      key: !!translatorKey,
+      region: !!translatorRegion,
+      endpoint: !!translatorEndpoint
+    },
+    openai: !!openaiApikey
+  });
 });
 
-//To start the Backend its "node" then the main name of the backend file .
-// "node proxy-server.js" if "proxy-server.js" is the main file 
+// -------------------- Start Server --------------------
+app.listen(port, () => {
+  console.log(`✅ Proxy server running on http://localhost:${port}`);
+});
